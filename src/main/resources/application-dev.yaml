@@ -1,0 +1,43 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9090
+          jwk-set-uri: http://localhost:9090/oauth2/jwks
+  datasource:
+    url: jdbc:postgresql://localhost:5432/register_manager
+    username: postgres
+    password: postgres
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      #ddl-auto: none
+    properties:
+      hibernate.format_sql: true
+
+server:
+  port: 8081
+
+management:
+  server:
+    port: 8082
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+logging:
+  file:
+    name: register-manager-resource-server.log
+  level:
+    root: debug
+#Trace, debug, info, warn, error
+
+app:
+  session:
+    expirationtime: 30
+
+
+viacep:
+  url:  https://viacep.com.br/ws/
