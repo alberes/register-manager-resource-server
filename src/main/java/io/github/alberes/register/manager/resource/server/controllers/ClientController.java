@@ -1,13 +1,13 @@
 package io.github.alberes.register.manager.resource.server.controllers;
 
 import io.github.alberes.register.manager.resource.server.constants.Constants;
-import io.github.alberes.register.manager.resource.server.controllers.dto.UserAccountDto;
-import io.github.alberes.register.manager.resource.server.controllers.dto.UserAccountReportDto;
-import io.github.alberes.register.manager.resource.server.controllers.dto.UserAccountUpdateDto;
+import io.github.alberes.register.manager.resource.server.controllers.dto.ClientDto;
+import io.github.alberes.register.manager.resource.server.controllers.dto.ClientReportDto;
+import io.github.alberes.register.manager.resource.server.controllers.dto.ClientUpdateDto;
 import io.github.alberes.register.manager.resource.server.controllers.exceptions.dto.StandardErrorDto;
-import io.github.alberes.register.manager.resource.server.controllers.mappers.UserAccountMapper;
-import io.github.alberes.register.manager.resource.server.domains.UserAccount;
-import io.github.alberes.register.manager.resource.server.services.UserAccountService;
+import io.github.alberes.register.manager.resource.server.controllers.mappers.ClientMapper;
+import io.github.alberes.register.manager.resource.server.domains.Client;
+import io.github.alberes.register.manager.resource.server.services.ClientService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -23,125 +23,118 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping("/api/v1/clients")
 @RequiredArgsConstructor
-@Tag(name = "UserAccount")
-public class UserAccountController implements GenericController{
+@Tag(name = "Client")
+public class ClientController implements GenericController{
 
-    private final UserAccountService service;
+    private final ClientService service;
 
-    private final UserAccountMapper mapper;
+    private final ClientMapper mapper;
 
     @PostMapping
     @PreAuthorize(Constants.HAS_ROLE_ADMIN)
-    @Operation(summary = "Save user.", description = "Save user in database. Only user with profile ADMIN can create user.",
-        operationId = "saveUser")
+    @Operation(summary = "Save client.", description = "Save client in database. Only user with profile ADMIN can create client.",
+        operationId = "saveClient")
     @ApiResponses({
             @ApiResponse(responseCode = "201", description = "Saved with success."),
             @ApiResponse(responseCode = "400", description = "Validation error.",
                     content = @Content(schema = @Schema(implementation = StandardErrorDto.class))),
             @ApiResponse(responseCode = "403", description = Constants.UNAUTHORIZED_MESSAGE,
                     content = @Content(schema = @Schema(implementation = StandardErrorDto.class))),
-            @ApiResponse(responseCode = "409", description = "There is a User with email.",
+            @ApiResponse(responseCode = "409", description = "There is a Client with clientId.",
                     content = @Content(schema = @Schema(implementation = StandardErrorDto.class)))
     })
-    public ResponseEntity<Void> save(@RequestBody @Valid UserAccountDto dto){
-        UserAccount userAccount = this.mapper.toEntity(dto);
-        userAccount.setRoles(new HashSet<String>());
-        userAccount.getRoles().add(dto.role().toUpperCase());
-        userAccount = this.service.save(userAccount);
+    public ResponseEntity<Void> save(@RequestBody @Valid ClientDto dto){
+        Client client = this.mapper.toEntity(dto);
+        client = this.service.save(client);
         return ResponseEntity
-                .created(this.createURI("/{id}", userAccount.getId().toString()))
+                .created(this.createURI("/{id}", client.getId().toString()))
                 .build();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{clientId}")
     @PreAuthorize(Constants.HAS_ROLE_ADMIN_USER)
-    @Operation(summary = "Find user.", description = "Find user in database. User with profile ADMIN can access any users and other profiles can only access resources that belong to him.",
+    @Operation(summary = "Find client.", description = "Find client in database. User with profile ADMIN can access any users and other profiles can only access resources that belong to him.",
         operationId = "findUser")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Found user in database."),
+            @ApiResponse(responseCode = "200", description = "Found client in database."),
             @ApiResponse(responseCode = "403", description = Constants.UNAUTHORIZED_MESSAGE,
                     content = @Content(schema = @Schema(implementation = StandardErrorDto.class))),
-            @ApiResponse(responseCode = "404", description = "Could not find user in database.",
+            @ApiResponse(responseCode = "404", description = "Could not find client in database.",
                     content = @Content(schema = @Schema(implementation = StandardErrorDto.class)))
     })
-    public ResponseEntity<UserAccountReportDto> find(@PathVariable String id){
-        UUID userId = UUID.fromString(id);
-        UserAccount userAccount = this.service.find(userId);
-        userAccount.setPassword(null);
-        UserAccountReportDto dto = this.mapper.toDto(userAccount);
+    public ResponseEntity<ClientDto> find(@PathVariable String clientId){
+        Client client = this.service.find(clientId);
+        client.setClientSecret(null);
+        ClientDto dto = this.mapper.toDto(client);
         return ResponseEntity.ok(dto);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{clientId}")
     @PreAuthorize(Constants.HAS_ROLE_ADMIN_USER)
-    @Operation(summary = "Update user.", description = "Update with success. User with profile ADMIN can access any users and other profiles can only access resources that belong to him.",
-        operationId = "updateUser")
+    @Operation(summary = "Update client.", description = "Update with success. User with profile ADMIN can access any clients and other profiles can only access resources that belong to him.",
+        operationId = "updateClient")
     @ApiResponses({
-            @ApiResponse(responseCode = "204", description = "Update name with success."),
+            @ApiResponse(responseCode = "204", description = "Update with success."),
             @ApiResponse(responseCode = "403", description = Constants.UNAUTHORIZED_MESSAGE,
                     content = @Content(schema = @Schema(implementation = StandardErrorDto.class))),
-            @ApiResponse(responseCode = "404", description = "Could not find user in database.",
+            @ApiResponse(responseCode = "404", description = "Could not find clint in database.",
                     content = @Content(schema = @Schema(implementation = StandardErrorDto.class)))
     })
-    public ResponseEntity<Void> update(@PathVariable String id, @RequestBody @Valid UserAccountUpdateDto dto){
-        UUID userId = UUID.fromString(id);
-        UserAccount userAccount = new UserAccount();
-        userAccount.setId(userId);
-        userAccount.setName(dto.name());
-        this.service.update(userAccount);
+    public ResponseEntity<Void> update(@PathVariable String clientId, @RequestBody @Valid ClientUpdateDto dto){
+        Client client = new Client();
+        client.setClientId(clientId);
+        client.setRedirectURI(dto.redirectURI());
+        this.service.update(client);
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{clientId}")
     @PreAuthorize(Constants.HAS_ROLE_ADMIN_USER)
-    @Operation(summary = "Delete user.", description = "Delete with success. User with profile ADMIN can access any users and other profiles can only access resources that belong to him.",
-        operationId = "deleteUser")
+    @Operation(summary = "Delete client.", description = "Delete with success. User with profile ADMIN can access any clients and other profiles can only access resources that belong to him.",
+        operationId = "deleteClient")
     @ApiResponses({
-            @ApiResponse(responseCode = "204", description = "Delete user in database."),
+            @ApiResponse(responseCode = "204", description = "Delete client in database."),
             @ApiResponse(responseCode = "403", description = Constants.UNAUTHORIZED_MESSAGE,
                     content = @Content(schema = @Schema(implementation = StandardErrorDto.class))),
-            @ApiResponse(responseCode = "404", description = "Could not find user in database.",
+            @ApiResponse(responseCode = "404", description = "Could not find client in database.",
                     content = @Content(schema = @Schema(implementation = StandardErrorDto.class)))
     })
-    public ResponseEntity<Void> delete(@PathVariable String id){
-        UUID userId = UUID.fromString(id);
-        this.service.delete(userId);
+    public ResponseEntity<Void> delete(@PathVariable String clientId){
+        this.service.delete(clientId);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping
     @PreAuthorize(Constants.HAS_ROLE_ADMIN)
-    @Operation(summary = "Find users.", description = "Find users in database. User with profile ADMIN can access any users and other profiles can only access resources that belong to him.",
+    @Operation(summary = "Find clients.", description = "Find clients in database. User with profile ADMIN can access any clients and other profiles can only access resources that belong to him.",
         operationId = "findUsers")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Find users in database."),
+            @ApiResponse(responseCode = "200", description = "Find clients in database."),
             @ApiResponse(responseCode = "403", description = Constants.UNAUTHORIZED_MESSAGE,
                     content = @Content(schema = @Schema(implementation = StandardErrorDto.class))),
-            @ApiResponse(responseCode = "204", description = "Could not find users in database.",
+            @ApiResponse(responseCode = "204", description = "Could not find clients in database.",
                     content = @Content(schema = @Schema(hidden = true)))
     })
-    public ResponseEntity<Page<UserAccountReportDto>> page(
+    public ResponseEntity<Page<ClientReportDto>> page(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
-            @RequestParam(value = "orderBy", defaultValue = "name") String orderBy,
+            @RequestParam(value = "orderBy", defaultValue = "clientId") String orderBy,
             @RequestParam(value = "direction", defaultValue = "ASC") String direction,
             @AuthenticationPrincipal Jwt jwt
     ){
-        Page<UserAccount> pageUsers = this.service.findPage(page, linesPerPage, orderBy, direction);
-        if(pageUsers.getTotalElements() == 0){
+        Page<Client> pageClients = this.service.findPage(page, linesPerPage, orderBy, direction);
+        if(pageClients.getTotalElements() == 0){
             return ResponseEntity.noContent().build();
         }
-        Page<UserAccountReportDto> pageReport = pageUsers
-                .map(u -> new UserAccountReportDto(
-                        u.getId().toString(), u.getName(), u.getEmail(), u.getLastModifiedDate(), u.getCreatedDate()));
+        Page<ClientReportDto> pageReport = pageClients
+                .map(c -> new ClientReportDto(
+                        c.getId().toString(), c.getClientId(), c.getRedirectURI(), c.getScope(),
+                        c.getLastModifiedDate(), c.getCreatedDate()));
         return ResponseEntity.ok(pageReport);
     }
 /*

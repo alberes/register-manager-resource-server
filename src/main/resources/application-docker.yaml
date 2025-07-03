@@ -18,11 +18,11 @@ spring:
       hibernate.format_sql: ${FORMAT_SQL:true}
 
 server:
-  port: ${APP_PORT:8080}
+  port: ${APP_PORT:9080}
 
 management:
   server:
-    port: ${MONITORING_PORT:9090}
+    port: ${MONITORING_PORT:9081}
   endpoints:
     web:
       exposure:
@@ -33,10 +33,3 @@ logging:
   level:
     root: ${LOG_LEVEL:warn}
 #Trace, debug, info, warn, error
-
-app:
-  session:
-    expirationtime: ${EXPIRATION_TIME:30}
-
-viacep:
-  url:  ${VIA_CEP_URL:https://viacep.com.br/ws/}

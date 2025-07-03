@@ -18,11 +18,11 @@ spring:
       hibernate.format_sql: true
 
 server:
-  port: 8081
+  port: 9080
 
 management:
   server:
-    port: 8082
+    port: 9081
   endpoints:
     web:
       exposure:
@@ -31,7 +31,7 @@ logging:
   file:
     name: register-manager-resource-server.log
   level:
-    root: debug
+    root: warn
 #Trace, debug, info, warn, error
 
 app:

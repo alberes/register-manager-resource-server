@@ -1,0 +1,69 @@
+services:
+  postgresdb:
+    image: postgres:16.3
+    container_name: postgresdb
+    ports:
+      - 5432:5432
+    networks:
+      - register-manager-authorization-network
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES: postgres
+      POSTGRES_DB: register_manager
+  pgadmin4:
+    image: dpage/pgadmin4:8.9
+    container_name: pgadmin
+    ports:
+      - "15432:80"
+    networks:
+      - register-manager-authorization-network
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+  register-manager-authorization-server:
+    image: register-manager-authorization-server:1.0.0
+    container_name: register-manager-authorization-server
+    ports:
+      - "9090:9090"
+      - "9091:9091"
+    environment:
+      DATASOURCE_URL: jdbc:postgresql://postgresdb:5432/register_manager
+      DATASOURCE_USERNAME: postgres
+      DATASOURCE_PASSWORD: postgres
+      SHOW_SQL: true
+      DDL_AUTO: update
+      FORMAT_SQL: true
+      APP_PORT: 9090
+      MONITORING_PORT: 9091
+      LOG_NAME: register-manager-authorization-server.log
+      LOG_LEVEL: warn
+      ACCESS_TOKEN_EXPIRATION: 30
+      REFRESH_TOKEN_EXPIRATION: 60
+    networks:
+      - register-manager-authorization-network
+  register-manager-resource-server:
+    image: register-manager-resource-server:1.0.0
+    container_name: register-manager-resource-server
+    ports:
+      - "9080:9080"
+      - "9081:9081"
+    environment:
+      DATASOURCE_URL: jdbc:postgresql://postgresdb:5432/register_manager
+      DATASOURCE_USERNAME: postgres
+      DATASOURCE_PASSWORD: postgres
+      SHOW_SQL: true
+      DDL_AUTO: update
+      FORMAT_SQL: true
+      APP_PORT: 9090
+      MONITORING_PORT: 9091
+      LOG_NAME: register-manager-resource-server.log
+      LOG_LEVEL: warn
+    networks:
+      - register-manager-authorization-network
+networks:
+  register-manager-authorization-network:
+    driver: bridge
+volumes:
+  pgadmin-data:

@@ -32,6 +32,7 @@ public interface Constants {
     public static final String REGISTRATION_DATE = "registrationDate";
 
     public static final String REGISTRATION_WITH_E_MAIL = "Registration with e-mail ";
+    public static final String REGISTRATION_WITH_E_CLIENT_ID = "Registration with client-id ";
     public static final String HAS_ALREADY_BEEN_REGISTERED = " has already been registered!";
     public static final String OBJECT_NOT_FOUND_ID = "Object not found! Id: ";
     public static final String TYPE = ", Type: ";

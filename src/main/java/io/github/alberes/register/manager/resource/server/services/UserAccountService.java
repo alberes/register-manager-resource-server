@@ -12,8 +12,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -74,19 +72,12 @@ public class UserAccountService{
     }
 
     @Transactional
-    public Page<UserAccount> findPage(UUID id, Integer page, Integer linesPerPage, String orderBy, String direction,
-                                      List<String> scopes) {
+    public Page<UserAccount> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
         Page<UserAccount> users = null;
-        if(this.controllerUtils.hasRoleAdmin(scopes)) {
-            users = this.repository.findAll(
-                    PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy));
-            log.info("Users(ADMIN) - total page: {}, total elements: {}", users.getTotalPages(), users.getTotalElements());
-            return users;
-        }else{
-            users = this.repository.findById(id, PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy));
-            log.info("Users(USER) - UserId: {}, total page: {}, total elements: {}", id, users.getTotalPages(), users.getTotalElements());
-            return users;
-        }
+        users = this.repository.findAll(
+                PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy));
+        log.info("Users(ADMIN) - total page: {}, total elements: {}", users.getTotalPages(), users.getTotalElements());
+        return users;
     }
 
     @Transactional
