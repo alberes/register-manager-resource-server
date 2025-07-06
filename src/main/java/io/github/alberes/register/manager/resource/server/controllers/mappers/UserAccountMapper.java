@@ -6,9 +6,6 @@ import io.github.alberes.register.manager.resource.server.controllers.dto.UserAc
 import io.github.alberes.register.manager.resource.server.domains.UserAccount;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.Named;
-
-import java.util.Set;
 
 @Mapper(componentModel = "spring")
 public interface UserAccountMapper {
@@ -16,6 +13,7 @@ public interface UserAccountMapper {
     @Mapping(source = "name", target = "name")
     @Mapping(source = "email", target = "email")
     @Mapping(source = "password", target = "password")
+    @Mapping(source = "scopes", target = "scopes")
     public UserAccount toEntity(UserAccountDto dto);
 
     @Mapping(source = "id", target = "id")
@@ -28,12 +26,7 @@ public interface UserAccountMapper {
     @Mapping(source = "id", target = "id")
     @Mapping(source = "name", target = "name")
     @Mapping(source = "email", target = "email")
-    @Mapping(source = "roles", target = "profiles", qualifiedByName = "mapRoles")
+    @Mapping(source = "roles", target = "roles")
     public UserAccountProfileDto toProfileDto(UserAccount userAccount);
-
-    @Named("mapRoles")
-    default Set<String> mapRoles(Set<String> roles) {
-        return roles;
-    }
 
 }

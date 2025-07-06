@@ -4,14 +4,12 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -49,5 +47,9 @@ public class UserAccount implements Serializable {
     @ElementCollection
     @CollectionTable(name = "user_account_role")
     private Set<String> roles;
+
+    @ElementCollection
+    @CollectionTable(name = "user_account_scope")
+    private Set<String> scopes;
 
 }

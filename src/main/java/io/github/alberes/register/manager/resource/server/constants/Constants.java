@@ -4,8 +4,6 @@ import java.util.Set;
 
 public interface Constants {
 
-    public static final String DATE_TIME_FORMATTER_PATTERN = "dd/MM/yyyy HH:mm:ss";
-
     public static final String ADMIN = "ADMIN";
     public static final String HAS_ROLE_ADMIN = "hasRole('ADMIN')";
     public static final String HAS_ROLE_ADMIN_USER = "hasRole('ADMIN') || hasRole('USER')";

@@ -31,7 +31,7 @@ logging:
   file:
     name: register-manager-resource-server.log
   level:
-    root: warn
+    root: debug
 #Trace, debug, info, warn, error
 
 app:

@@ -54,6 +54,13 @@ public class SecurityResourceServerConfiguration {
         return new GrantedAuthorityDefaults(Constants.BLANK);
     }
 
+    @Bean
+    public JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter() {
+        JwtGrantedAuthoritiesConverter converter = new JwtGrantedAuthoritiesConverter();
+        converter.setAuthorityPrefix(Constants.BLANK); // Set an empty prefix
+        return converter;
+    }
+
     //Set in token JWT prefix without SCOPE
     @Bean
     public JwtAuthenticationConverter jwtAuthenticationConverter(){

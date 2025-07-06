@@ -5,6 +5,8 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
+
 @Schema(name = "UserAccount")
 public record UserAccountDto(
         @NotBlank(message = "Obligatory field")
@@ -18,5 +20,6 @@ public record UserAccountDto(
         String password,
         @NotBlank(message = "Obligatory field")
         @Size(min = 4, max = 20, message = "Fill this field with size between 4 and 20")
-        String role) {
+        String role,
+        List<String> scopes) {
 }

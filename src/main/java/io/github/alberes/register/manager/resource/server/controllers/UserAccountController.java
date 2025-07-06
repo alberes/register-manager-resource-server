@@ -24,7 +24,6 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -62,7 +61,8 @@ public class UserAccountController implements GenericController{
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize(Constants.HAS_ROLE_ADMIN_USER)
+    //@PreAuthorize(Constants.HAS_ROLE_ADMIN_USER)
+    @PreAuthorize(Constants.HAS_ROLE_ADMIN_USER + " and hasAuthority('SCOPE_user.read')")
     @Operation(summary = "Find user.", description = "Find user in database. User with profile ADMIN can access any users and other profiles can only access resources that belong to him.",
         operationId = "findUser")
     @ApiResponses({

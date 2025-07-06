@@ -9,5 +9,5 @@ public record UserAccountProfileDto(
         String id,
         String name,
         String email,
-        Set<String> profiles) {
+        Set<String> roles) {
 }

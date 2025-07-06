@@ -2,9 +2,7 @@ package io.github.alberes.register.manager.resource.server.services;
 
 import io.github.alberes.register.manager.resource.server.constants.Constants;
 import io.github.alberes.register.manager.resource.server.domains.Client;
-import io.github.alberes.register.manager.resource.server.domains.UserAccount;
 import io.github.alberes.register.manager.resource.server.repositories.ClientRepository;
-import io.github.alberes.register.manager.resource.server.repositories.UserAccountRepository;
 import io.github.alberes.register.manager.resource.server.services.exceptions.DuplicateRecordException;
 import io.github.alberes.register.manager.resource.server.services.exceptions.ObjectNotFoundException;
 import io.github.alberes.register.manager.resource.server.utils.ControllerUtils;
@@ -17,10 +15,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
