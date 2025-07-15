@@ -31,13 +31,9 @@ logging:
   file:
     name: register-manager-resource-server.log
   level:
-    root: debug
+    root: warn
 #Trace, debug, info, warn, error
 
 app:
   session:
     expirationtime: 30
-
-
-viacep:
-  url:  https://viacep.com.br/ws/
