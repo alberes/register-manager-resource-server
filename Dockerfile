@@ -15,8 +15,8 @@ COPY --from=build ./build/target/*.jar ./register-manager-resource-server.jar
 expose 9080
 expose 9081
 
-ENV URL_OAUTH2='http://localhost:9090'
-ENV URL_OAUTH2_JWKS='http://localhost:8081/oauth2/jwks'
+ENV URL_OAUTH2='http://register-manager-authorization-server:9090'
+ENV URL_OAUTH2_JWKS='http://register-manager-authorization-server:9090/oauth2/jwks'
 ENV DATASOURCE_URL='jdbc:postgresql://postgresdb:5432/register_manager'
 ENV DATASOURCE_USERNAME='postgres'
 ENV DATASOURCE_PASSWORD='postgres'
