@@ -7,7 +7,7 @@ Este projeto é responsável por cadastro de usuários e clientes (ClientId e Cl
 Funcionalidades
 * Cadastro de usuário:    
   Cadastro, consulta de lista de usuários, consulta simples, atualização e exclusão.
-* Cadastro de clientes (ClientId e ClientSecret)
+* Cadastro de clientes (ClientId e ClientSecret):
   Cadastro, consulta de lista de clientes, consulta simples, atualização e exclusão.
 * Suporte a múltiplos grant types:    
   Authorization Code, Client Credentials, Refresh Token, e outros.
@@ -57,14 +57,14 @@ Funcionalidades
   * [4DEV](https://www.4devs.com.br/)
 
 ### Como Executar
-1. Clone o repositório: git clone https://github.com/alberes/register-manager-resource-server
+1. Clone o repositório: git clone [register-manager-resource-server](https://github.com/alberes/register-manager-resource-server)
 2. Configure o banco de dados:
 - Banco de dados: register_manager
 - Tabelas: client, user_account, user_account_role e user_account_scope    
   Certifique-se de que o banco de dados está configurado corretamente.    
   A aplicação irá criar as tabelas automaticamento caso não exista ou execute o script antes que se encontra no projeto.    
   Localizar os arquivos [SUB_DIRETORIOS]/register-manager-resource-server/DDL.sql e [SUB_DIRETORIOS]/register-manager-resource-server/DML.sql
-3. Usando uma imagem Docker (Opcional)
+3. Usando uma imagem Docker (Opcional caso tenha uma banco instalado)
 4. Tempo de sessão está configurado para 60 minutos
 
 Um opção é criar um container docker com a imagem do Postgres, abaixo um exemplo que configurar usuário, senha e cria o banco de dados.  
@@ -88,21 +88,21 @@ A aplicação subirá na porta 9080
     - Usar o arquivo DML.sql
         - [SUB_DIRETORIOS]/register-manager-resource-server/DML.sql
 2. Observabilidade e métricas
-    - (Monitoramento)[http://localhost:9081/actuator]
-    - (Log)[http://localhost:9081/actuator/logfile]
-    - (Metricas)[http://localhost:9081/actuator/metrics]
-    - (DataSource)[http://localhost:9081/actuator/metrics/hikaricp.connections.active]
-    - (Memória)[http://localhost:9081/actuator/metrics/jvm.buffer.memory.used]
-    - (CPU)[http://localhost:9081/actuator/metrics/process.cpu.usage]
-    - (Autorzação)[http://localhost:9081/actuator/metrics/spring.security.authorizations.active]
-    - (Sessões)[tomcat.sessions.active.current]
+    - [Monitoramento](http://localhost:9081/actuator)
+    - [Log](http://localhost:9081/actuator/logfile)
+    - [Metricas](http://localhost:9081/actuator/metrics)
+    - [DataSource](http://localhost:9081/actuator/metrics/hikaricp.connections.active)
+    - [Memória](http://localhost:9081/actuator/metrics/jvm.buffer.memory.used)
+    - [CPU](http://localhost:9081/actuator/metrics/process.cpu.usage)
+    - [Autorzação](http://localhost:9081/actuator/metrics/spring.security.authorizations.active)
+    - [Sessões]([)tomcat.sessions.active.current)
 3. Testes usando Postman
     - Localize a collection que se encontra no diretório [SUB_DIRETORIOS]/register-manager-resource-server/register-manager-resource-server.postman_collection
     - Importar no Postman
 
 ### Autenticações
 
-(Authorization Server)[https://github.com/alberes/register-manager-authorization-server/blob/master/README.md]
+[Authorization Server](https://github.com/alberes/register-manager-authorization-server/blob/master/README.md)
 
 ### Docker
 
