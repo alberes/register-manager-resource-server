@@ -1,0 +1,1112 @@
+{
+	"info": {
+		"_postman_id": "f0cc3550-97ca-4ab6-929a-47d779e59f84",
+		"name": "register-manager-resource-server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "891104",
+		"_collection_link": "https://solar-station-361672.postman.co/workspace/cursos~ed905280-362f-4384-9722-3985fe33206e/collection/891104-f0cc3550-97ca-4ab6-929a-47d779e59f84?action=share&source=collection_link&creator=891104"
+	},
+	"item": [
+		{
+			"name": "Client",
+			"item": [
+				{
+					"name": "CREATE_CLIENT_201",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJraWQiOiJkYTE5ZTJlYi0wNDE4LTRmZjUtOTY0Mi1kZGQwNGIyMDA1NjQiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbi1jbGllbnQtaWQiLCJhdWQiOiJhZG1pbi1jbGllbnQtaWQiLCJuYmYiOjE3NTE1NjUyNDEsInNjb3BlIjpbIkFETUlOIl0sImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6OTA5MCIsImV4cCI6MTc1MTU2NzA0MSwiaWF0IjoxNzUxNTY1MjQxLCJqdGkiOiJmNzJmYzJjMy05MzA3LTRkNzgtYmFiNS0wMDVlMDhkM2ZlNTEifQ.nK7RambXfd6gOyLi58AiXveuNWE5-e6jmmMJ5CJY4XAshR16SLcgqrivJzvM64jFWOnZF12rPCkRHBOjc0YkmzU2bUJyLJMGe4EcAxM6GYjTsoL1Ukb9W1W_Md_dFfag-0S4duSWf44YniuSrEgTgHkttXqvQdEroA26UOu0HW7ZB3M6xyXST7hOhqzVWVn9XWvaI-ELGRgHlawMZNKzwwB0EEieaHBxRMzwi3LT9eKN_C8kKZJ-ku5oVmZR80CKLH_QJylF6uC6CND8MmjLT0jD7Iu11eNXrMQytMScJV1LEFgCk3H3rr4TtQ0QVwbAY9uluvxAcfIpiJiOMP8T9Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"clientId\": \"postman-client\",\r\n    \"clientSecret\": \"postman-secret\",\r\n    \"redirectURI\": \"http://localhost:8081\",\r\n    \"scope\": \"USER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9080/api/v1/clients",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"api",
+								"v1",
+								"clients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FIND_CLIENT_200",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJraWQiOiJkYTE5ZTJlYi0wNDE4LTRmZjUtOTY0Mi1kZGQwNGIyMDA1NjQiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbi1jbGllbnQtaWQiLCJhdWQiOiJhZG1pbi1jbGllbnQtaWQiLCJuYmYiOjE3NTE1NjUyNDEsInNjb3BlIjpbIkFETUlOIl0sImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6OTA5MCIsImV4cCI6MTc1MTU2NzA0MSwiaWF0IjoxNzUxNTY1MjQxLCJqdGkiOiJmNzJmYzJjMy05MzA3LTRkNzgtYmFiNS0wMDVlMDhkM2ZlNTEifQ.nK7RambXfd6gOyLi58AiXveuNWE5-e6jmmMJ5CJY4XAshR16SLcgqrivJzvM64jFWOnZF12rPCkRHBOjc0YkmzU2bUJyLJMGe4EcAxM6GYjTsoL1Ukb9W1W_Md_dFfag-0S4duSWf44YniuSrEgTgHkttXqvQdEroA26UOu0HW7ZB3M6xyXST7hOhqzVWVn9XWvaI-ELGRgHlawMZNKzwwB0EEieaHBxRMzwi3LT9eKN_C8kKZJ-ku5oVmZR80CKLH_QJylF6uC6CND8MmjLT0jD7Iu11eNXrMQytMScJV1LEFgCk3H3rr4TtQ0QVwbAY9uluvxAcfIpiJiOMP8T9Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9080/api/v1/clients/:CLIENT_ID",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"api",
+								"v1",
+								"clients",
+								":CLIENT_ID"
+							],
+							"variable": [
+								{
+									"key": "CLIENT_ID",
+									"value": "postman-client"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE_CLIENT_204",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJraWQiOiI1Yzg0NTkxMS04OTE3LTQ5OGEtOTgzZC1hMmYzM2Q1NjU0OTEiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbi1jbGllbnQtaWQiLCJhdWQiOiJhZG1pbi1jbGllbnQtaWQiLCJuYmYiOjE3NTE2MzExOTgsInNjb3BlIjpbIkFETUlOIl0sImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6OTA5MCIsImlkIjoiNDAzMTE5ZDItYmU3Ni00ZmZhLTg2YjUtZDNhODZjOGQyZDQyIiwiZXhwIjoxNzUxNjMyOTk4LCJpYXQiOjE3NTE2MzExOTgsImp0aSI6IjNlNDkyMjVhLTRhOTctNGQ5ZS1iMmY4LWI3YjFhODkwYzRiNiJ9.VrZNEiy9iIJiPfzT49AyrLjkM0hNjoBNY1ciymYHslmsGDaUQ_IQuIR8zhahO1pFdw1JOgU5-j_fA-mwwK9qDvcn9SoBIREqEIiBH6d2MbNT7o3-snzu9Xoq1e-5Zy9M9ysognnw2td94ZiLy8NzJzFBfU1fxNmtRIOIum4WugyV29GWP7v-BzxadXXOhDjCFRpdI0y-hMJB_pBGSlrbxCcGtLlCcHPSJraYctk4wS1HR8oasQuJT9QBsxs-ow2B1FGoQQP_8YHdyz5c51FG75idJfl-2pDh5xyXupDJXC82wWew-w3dVdvKhN_iLxuey9KCRO2Ndj60ozu1i9FV_g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"redirectURI\": \"http://localhost:8080/login/oauth2/code/client-server-oidc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9080/api/v1/clients/:CLIENT_ID",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"api",
+								"v1",
+								"clients",
+								":CLIENT_ID"
+							],
+							"variable": [
+								{
+									"key": "CLIENT_ID",
+									"value": "admin-client-id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE_CLIENT_204",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJraWQiOiJkYTE5ZTJlYi0wNDE4LTRmZjUtOTY0Mi1kZGQwNGIyMDA1NjQiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJteS1jbGllbnQtaWQiLCJhdWQiOiJteS1jbGllbnQtaWQiLCJuYmYiOjE3NTE1NjU2NzEsInNjb3BlIjpbIlVTRVIiXSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDkwIiwiZXhwIjoxNzUxNTY3NDcxLCJpYXQiOjE3NTE1NjU2NzEsImp0aSI6IjFhZDEyMzA1LTVhMjUtNDdlMS1iMGJmLTkyYzQ0MjU3ZDM4MCJ9.VNyNOPYl-vJa1xNVfh-uYNeMZOr7lSVlwrSuakeTfVZDiaQ7hpsCpXdSXBvV0bxPRteOt23U_6lvPAZG6eBBq7-L-9IyfAcyv1IUF5utwQAhu5I89UUKzqLdLBYaprM3P4SjcVW7VNX-AD8NTAXvX1uvGDyiboXMyXGCZQBfomAtXOSViWXE6xNdn5oP0WQjFzA0Zjoe3gbufhZzirloznBhpvmNkWjECrWwL3yhN_gki37kfS5vmmiq3hnluDdLZXxJhWECFQnqxD0sei1zUU2Y18C2Eu25b_evBzhCKCrLhINk-p-0ebdW1FdniIW7TziODIfbYyR2z6yGSbOIzg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9080/api/v1/clients/:CLIENT_ID",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"api",
+								"v1",
+								"clients",
+								":CLIENT_ID"
+							],
+							"variable": [
+								{
+									"key": "CLIENT_ID",
+									"value": "postman-client"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CLIENT_CLAIMS",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJraWQiOiJhY2U1NzNkMy1kNzdhLTQxM2ItOWMwZi0zOTM0ZDI3Yzg2NmMiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbi1jbGllbnQtaWQiLCJhdWQiOiJhZG1pbi1jbGllbnQtaWQiLCJuYmYiOjE3NTE1NzA4NDcsInNjb3BlIjpbIkFETUlOIl0sImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6OTA5MCIsImlkIjoiNDAzMTE5ZDItYmU3Ni00ZmZhLTg2YjUtZDNhODZjOGQyZDQyIiwiZXhwIjoxNzUxNTcyNjQ3LCJpYXQiOjE3NTE1NzA4NDcsImp0aSI6IjdlOWY3MzM4LTVhYTMtNDUxZi1iZjBjLWQ0YjBkZDIzNDk2MyJ9.jmmRLX1LeNzeMMwFV7v0LZ30W07ggkCTpPHdBTEY-Y_KY-wdQqlYWRiZKDLcscRYjaaUXcV-GBeK__9FqiwMi5eiaH2DisC65zdR-gxYD9uRSaMbX6iQwKE4JMvGQ-6dTqKvbCEqWJcCLqA1Tb7g6P5udhfasKxsSXyyerDvrNcZUypyxyvWDdnxrf2imF7IP5Y-QF3cRTdzs_QZOOQlf4iueQfoFGaCpbZjmlOyf8_794aJ7Uvv0wxQPcqvaydCEo3dHzhJONo3swQ0ihCdbZrMJqdCPa_KAqNLIYxjRKjplU5bzyYQ6VdzEXogU9ZG0ezXxL1_qDfcf4EDUTjegg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9080/api/v1/clients/claims",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"api",
+								"v1",
+								"clients",
+								"claims"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FIND_CLIENT_PAGE_ROLE_ADMIN",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJraWQiOiJhY2U1NzNkMy1kNzdhLTQxM2ItOWMwZi0zOTM0ZDI3Yzg2NmMiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbi1jbGllbnQtaWQiLCJhdWQiOiJhZG1pbi1jbGllbnQtaWQiLCJuYmYiOjE3NTE1NzEzNDUsInNjb3BlIjpbIkFETUlOIl0sImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6OTA5MCIsImlkIjoiNDAzMTE5ZDItYmU3Ni00ZmZhLTg2YjUtZDNhODZjOGQyZDQyIiwiZXhwIjoxNzUxNTczMTQ1LCJpYXQiOjE3NTE1NzEzNDUsImp0aSI6IjYyNDk4ZGYwLTViZGQtNDE4YS1hMzA5LTViZTRmMDM2ZjlmYyJ9.skrQOAzpe2uJtR5Mgy-OrI8ZxyAMIpYF1WFtCiB0Q2h9iZxhMshUizrVrgM-WikH062L7UbC8PFKuf39lO8f4mYawCBbYnBtaxUroZin0pXmVd8feyigfAEv1uZ8PHm_Y_8dyHUpE93_naXTDgVG2xqgAQsJA6S-7LjhivOk2RO9mBXFHqRyZcPM2Xy4vkWcLpBFfJF0LfZw6ZkrAFMA6rj_Tv0cmqgd6q9qCnG1k-tgzaAyaa5Qn3UoBHh4mxnJLxVei_7c5jx-4FXDvXkX_E2Ml_vqWwPYhO2Ae54_Gq1GqVa9LTcwW49zYPD8Dhh5V4QP4bpv4FX687jiOBojkw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9080/api/v1/clients?page=0&linesPerPage=24&orderBy=clientId&direction=ASC",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"api",
+								"v1",
+								"clients"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0",
+									"description": "Primeira página"
+								},
+								{
+									"key": "linesPerPage",
+									"value": "24",
+									"description": "Quantidade de registro retornado"
+								},
+								{
+									"key": "orderBy",
+									"value": "clientId",
+									"description": "Campo de ordenação"
+								},
+								{
+									"key": "direction",
+									"value": "ASC",
+									"description": "Direção da ordenação"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "FIND_USER_PAGE_ROLE_USER",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users/:ID/all?page=0&linesPerPage=24&orderBy=name&direction=ASC",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										":ID",
+										"all"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "0",
+											"description": "Primeira página"
+										},
+										{
+											"key": "linesPerPage",
+											"value": "24",
+											"description": "Quantidade de registro retornado"
+										},
+										{
+											"key": "orderBy",
+											"value": "name",
+											"description": "Campo de ordenação"
+										},
+										{
+											"key": "direction",
+											"value": "ASC",
+											"description": "Direção da ordenação"
+										}
+									],
+									"variable": [
+										{
+											"key": "ID",
+											"value": "f34b269e-b323-4f51-aa26-2836dbbeb76e",
+											"description": "ID de usuário com ROLE ADMIN"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "CREATE_USER_201",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJraWQiOiI0ZDIzNmJmNS05NDk4LTQ4NGItODFlNS1iMWY4NTcwN2RmZGIiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbi1jbGllbnQtaWQiLCJhdWQiOiJhZG1pbi1jbGllbnQtaWQiLCJuYmYiOjE3NTIwMTY0NzMsInNjb3BlIjpbIkFETUlOIl0sImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6OTA5MCIsImlkIjoiMmM3MDBjNWUtN2RmYS00ZWQ5LTlkYTAtYTJjYTVlZTBiMmQ1IiwiZXhwIjoxNzUyMDE4MjczLCJpYXQiOjE3NTIwMTY0NzMsImp0aSI6IjlmNjE0OTU0LTIzZTYtNDUxYi1hNzg2LWNhMTg0MjY0ZTUxMiJ9.tWHXe64GoAu6uIjZkubwWjIKD7NXXjjaBg6WcH9goVyW_8Tt2WmDVCqdQZ1EmH6hAEvRixcvYs-87Vqkk7Rbd0kyRezrPZj7FLQ4dmPWGSn7UEqxqti8yu2kuZszAVemphbU3DTMnrPpt2yx3nA-oWEhi1T4vi1-YqnbCgGTqNE7twLeqZ2ZT7dkW9I3oBNYEHjLQTyj_xTdruF-HuYZp9DwovwO9rO-7JUhlIqa7KBdGEGjksivh_AtEWOeh_C8GaiuRX8qQuICUngWikuewC2n5cHDiF7E2eKNFRTqgCF-HB8s27nIShTgRAco7Yx-RbKp_5-lhJfLA7DxSfHjdA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Posterman2 User\",\r\n    \"email\": \"postman2@postman.com\",\r\n    \"password\": \"postman4123456\",\r\n    \"role\": \"USER\",\r\n    \"scopes\": [\r\n    \"write\",\r\n    \"read\",\r\n    \"update\",\r\n    \"delete\"\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9080/api/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "CREATE_USER__EMAIL_409",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Posteman User\",\r\n    \"email\": \"postman@postman.com\",\r\n    \"password\": \"postman123456\",\r\n    \"role\": \"USER\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "CREATE_USER_NAME_400",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"User Test\",\r\n    \"email\": \"user@user.com\",\r\n    \"password\": \"user123456\",\r\n    \"role\": \"USER\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "CREATE_USER_EMAIL_400",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"User Test Data\",\r\n    \"email\": \"useruser.com\",\r\n    \"password\": \"user123456\",\r\n    \"role\": \"USER\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "CREATE_USER_PASSWORD_400",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"User Test Data\",\r\n    \"email\": \"user@user.com\",\r\n    \"password\": \"user123\",\r\n    \"role\": \"USER\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "CREATE_USER_ROLE_400",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"User Test Data\",\r\n    \"email\": \"user@user.com\",\r\n    \"password\": \"user123456\",\r\n    \"role\": \"US\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "CREATE_USER_EMAIL_OBLIGATORY",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"User Test Data\",\r\n    \"password\": \"user123456\",\r\n    \"role\": \"USER\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "CREATE_USER_NAME_OBLIGATORY_400",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"user@user.com\",\r\n    \"password\": \"user123456\",\r\n    \"role\": \"USER\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "CREATE_USER_PASSWORD_OBRIGATORY_400",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"User Test Data\",\r\n    \"email\": \"user@user.com\",\r\n    \"role\": \"USER\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "CREATE_USER_ROLE_OBLIGATORY_400",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"User Test Data\",\r\n    \"email\": \"user@user.com\",\r\n    \"password\": \"user123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "CREATE_USER_ROLE_400",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"User Test Data\",\r\n    \"email\": \"user@user.com\",\r\n    \"password\": \"user123456\",\r\n    \"role\": \"US\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "UPDATE_USER_204",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJraWQiOiJkYTE5ZTJlYi0wNDE4LTRmZjUtOTY0Mi1kZGQwNGIyMDA1NjQiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbi1jbGllbnQtaWQiLCJhdWQiOiJhZG1pbi1jbGllbnQtaWQiLCJuYmYiOjE3NTE1NjY1OTksInNjb3BlIjpbIkFETUlOIl0sImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6OTA5MCIsImV4cCI6MTc1MTU2ODM5OSwiaWF0IjoxNzUxNTY2NTk5LCJqdGkiOiIyNWM4YzRjMC1mYjExLTQ2MTMtYTc2Yi0zYjRhNjI5NWVlZjYifQ.KWCRdetXIHwELIW6tqKWXWrOGBD3GgcgL3cNev7qJ93htPmd-WeRQGc42uUd4PXZDbStCaQuVsYxc-Eyva4nd1XTzdRfTfWsg6TwgdmcjOvC-Hg1GkGP9uTgY0_KmamzjVR_jWLRMS7RSVuKYcTgrYNT1CBvNtd1pQjp8Ez_X9pnBluoWVzs9PvYK7Bru2M7hCWsZ1p-x3CBu64JWM39BaR7DRShn6RdlUwWrs-suZItTIyO0Ekmq7wkxy4pODgLc0gqD3gAzfcu_qknzMDX1hRId6Ff7dLl5ISMO5fbBTncY4Eb0RW20C9ZXxOkei_MGQiq4HpJ6hm4jjrufWMZUA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Posterman4 User updated\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9080/api/v1/users/:ID",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								":ID"
+							],
+							"variable": [
+								{
+									"key": "ID",
+									"value": "124f30b7-ea18-4fdf-beef-7908d6b86654",
+									"description": "Colocar um id que exista no banco de dados"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "UPDATE_USER_404",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"user 1 register updated\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users/:ID",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										":ID"
+									],
+									"variable": [
+										{
+											"key": "ID",
+											"value": "4c4483aa-e2ea-4ec4-84c4-ff5c6e06c021",
+											"description": "Colocar um id que não exista no banco de dados"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "UPDATE_USER_NAME_400",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name1\": \"user 1 register updated\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users/:ID",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										":ID"
+									],
+									"variable": [
+										{
+											"key": "ID",
+											"value": "4c4483aa-e2ea-4ec4-84c4-ff5c6e06c020",
+											"description": "Colocar um id que exista no banco de dados"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "FIND_USER_200",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJraWQiOiJkYTE5ZTJlYi0wNDE4LTRmZjUtOTY0Mi1kZGQwNGIyMDA1NjQiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbi1jbGllbnQtaWQiLCJhdWQiOiJhZG1pbi1jbGllbnQtaWQiLCJuYmYiOjE3NTE1NjY1OTksInNjb3BlIjpbIkFETUlOIl0sImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6OTA5MCIsImV4cCI6MTc1MTU2ODM5OSwiaWF0IjoxNzUxNTY2NTk5LCJqdGkiOiIyNWM4YzRjMC1mYjExLTQ2MTMtYTc2Yi0zYjRhNjI5NWVlZjYifQ.KWCRdetXIHwELIW6tqKWXWrOGBD3GgcgL3cNev7qJ93htPmd-WeRQGc42uUd4PXZDbStCaQuVsYxc-Eyva4nd1XTzdRfTfWsg6TwgdmcjOvC-Hg1GkGP9uTgY0_KmamzjVR_jWLRMS7RSVuKYcTgrYNT1CBvNtd1pQjp8Ez_X9pnBluoWVzs9PvYK7Bru2M7hCWsZ1p-x3CBu64JWM39BaR7DRShn6RdlUwWrs-suZItTIyO0Ekmq7wkxy4pODgLc0gqD3gAzfcu_qknzMDX1hRId6Ff7dLl5ISMO5fbBTncY4Eb0RW20C9ZXxOkei_MGQiq4HpJ6hm4jjrufWMZUA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9080/api/v1/users/:ID",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								":ID"
+							],
+							"variable": [
+								{
+									"key": "ID",
+									"value": "124f30b7-ea18-4fdf-beef-7908d6b86654",
+									"description": "Colocar um id que exista no banco de dados\n"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "FIND_USER_404",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users/:ID",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										":ID"
+									],
+									"variable": [
+										{
+											"key": "ID",
+											"value": "4c4483aa-e2ea-4ec4-84c4-ff5c6e06c021",
+											"description": "Colocar um id que não exista no banco de dados"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "DELETE_USER_204",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJraWQiOiJkYTE5ZTJlYi0wNDE4LTRmZjUtOTY0Mi1kZGQwNGIyMDA1NjQiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbi1jbGllbnQtaWQiLCJhdWQiOiJhZG1pbi1jbGllbnQtaWQiLCJuYmYiOjE3NTE1NjY1OTksInNjb3BlIjpbIkFETUlOIl0sImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6OTA5MCIsImV4cCI6MTc1MTU2ODM5OSwiaWF0IjoxNzUxNTY2NTk5LCJqdGkiOiIyNWM4YzRjMC1mYjExLTQ2MTMtYTc2Yi0zYjRhNjI5NWVlZjYifQ.KWCRdetXIHwELIW6tqKWXWrOGBD3GgcgL3cNev7qJ93htPmd-WeRQGc42uUd4PXZDbStCaQuVsYxc-Eyva4nd1XTzdRfTfWsg6TwgdmcjOvC-Hg1GkGP9uTgY0_KmamzjVR_jWLRMS7RSVuKYcTgrYNT1CBvNtd1pQjp8Ez_X9pnBluoWVzs9PvYK7Bru2M7hCWsZ1p-x3CBu64JWM39BaR7DRShn6RdlUwWrs-suZItTIyO0Ekmq7wkxy4pODgLc0gqD3gAzfcu_qknzMDX1hRId6Ff7dLl5ISMO5fbBTncY4Eb0RW20C9ZXxOkei_MGQiq4HpJ6hm4jjrufWMZUA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9080/api/v1/users/:ID",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								":ID"
+							],
+							"variable": [
+								{
+									"key": "ID",
+									"value": "124f30b7-ea18-4fdf-beef-7908d6b86654",
+									"description": "Colocar um id que exista no banco de dados"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "DELETE_USER_404",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users/:ID",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										":ID"
+									],
+									"variable": [
+										{
+											"key": "ID",
+											"value": "4c4483aa-e2ea-4ec4-84c4-ff5c6e06c020",
+											"description": "Colocar um id que não exista no banco de dados"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "USER_CLAIMS",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJraWQiOiJkYTE5ZTJlYi0wNDE4LTRmZjUtOTY0Mi1kZGQwNGIyMDA1NjQiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbi1jbGllbnQtaWQiLCJhdWQiOiJhZG1pbi1jbGllbnQtaWQiLCJuYmYiOjE3NTE1NjY1OTksInNjb3BlIjpbIkFETUlOIl0sImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6OTA5MCIsImV4cCI6MTc1MTU2ODM5OSwiaWF0IjoxNzUxNTY2NTk5LCJqdGkiOiIyNWM4YzRjMC1mYjExLTQ2MTMtYTc2Yi0zYjRhNjI5NWVlZjYifQ.KWCRdetXIHwELIW6tqKWXWrOGBD3GgcgL3cNev7qJ93htPmd-WeRQGc42uUd4PXZDbStCaQuVsYxc-Eyva4nd1XTzdRfTfWsg6TwgdmcjOvC-Hg1GkGP9uTgY0_KmamzjVR_jWLRMS7RSVuKYcTgrYNT1CBvNtd1pQjp8Ez_X9pnBluoWVzs9PvYK7Bru2M7hCWsZ1p-x3CBu64JWM39BaR7DRShn6RdlUwWrs-suZItTIyO0Ekmq7wkxy4pODgLc0gqD3gAzfcu_qknzMDX1hRId6Ff7dLl5ISMO5fbBTncY4Eb0RW20C9ZXxOkei_MGQiq4HpJ6hm4jjrufWMZUA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9080/api/v1/users/claims",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"claims"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FIND_USER_PAGE_ROLE_ADMIN",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJraWQiOiJhY2U1NzNkMy1kNzdhLTQxM2ItOWMwZi0zOTM0ZDI3Yzg2NmMiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbi1jbGllbnQtaWQiLCJhdWQiOiJhZG1pbi1jbGllbnQtaWQiLCJuYmYiOjE3NTE1NzEzNDUsInNjb3BlIjpbIkFETUlOIl0sImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6OTA5MCIsImlkIjoiNDAzMTE5ZDItYmU3Ni00ZmZhLTg2YjUtZDNhODZjOGQyZDQyIiwiZXhwIjoxNzUxNTczMTQ1LCJpYXQiOjE3NTE1NzEzNDUsImp0aSI6IjYyNDk4ZGYwLTViZGQtNDE4YS1hMzA5LTViZTRmMDM2ZjlmYyJ9.skrQOAzpe2uJtR5Mgy-OrI8ZxyAMIpYF1WFtCiB0Q2h9iZxhMshUizrVrgM-WikH062L7UbC8PFKuf39lO8f4mYawCBbYnBtaxUroZin0pXmVd8feyigfAEv1uZ8PHm_Y_8dyHUpE93_naXTDgVG2xqgAQsJA6S-7LjhivOk2RO9mBXFHqRyZcPM2Xy4vkWcLpBFfJF0LfZw6ZkrAFMA6rj_Tv0cmqgd6q9qCnG1k-tgzaAyaa5Qn3UoBHh4mxnJLxVei_7c5jx-4FXDvXkX_E2Ml_vqWwPYhO2Ae54_Gq1GqVa9LTcwW49zYPD8Dhh5V4QP4bpv4FX687jiOBojkw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9080/api/v1/users?page=0&linesPerPage=24&orderBy=name&direction=ASC",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0",
+									"description": "Primeira página"
+								},
+								{
+									"key": "linesPerPage",
+									"value": "24",
+									"description": "Quantidade de registro retornado"
+								},
+								{
+									"key": "orderBy",
+									"value": "name",
+									"description": "Campo de ordenação"
+								},
+								{
+									"key": "direction",
+									"value": "ASC",
+									"description": "Direção da ordenação"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "FIND_USER_PAGE_ROLE_USER",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users/:ID/all?page=0&linesPerPage=24&orderBy=name&direction=ASC",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										":ID",
+										"all"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "0",
+											"description": "Primeira página"
+										},
+										{
+											"key": "linesPerPage",
+											"value": "24",
+											"description": "Quantidade de registro retornado"
+										},
+										{
+											"key": "orderBy",
+											"value": "name",
+											"description": "Campo de ordenação"
+										},
+										{
+											"key": "direction",
+											"value": "ASC",
+											"description": "Direção da ordenação"
+										}
+									],
+									"variable": [
+										{
+											"key": "ID",
+											"value": "f34b269e-b323-4f51-aa26-2836dbbeb76e",
+											"description": "ID de usuário com ROLE ADMIN"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		}
+	]
+}

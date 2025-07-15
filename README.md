@@ -1,14 +1,17 @@
 # Projeto: Servidor de recursos
 Este projeto é responsável por cadastro de usuários e clientes (ClientId e ClientSecret) e trabalha junto com authorizarion server.
 
-Funcionalidades
-* Cadastro de usuário:    
-  Cadastro, consulta de lista de usuários, consulta simples, atualização e exclusão.
-* Cadastro de clientes (ClientId e ClientSecret):
-  Cadastro, consulta de lista de clientes, consulta simples, atualização e exclusão.
-* Suporte a múltiplos grant types:    
-  Authorization Code, Client Credentials, Refresh Token, e outros.
+* Funcionalidades
+  * Cadastro de usuário:    
+    Cadastro, consulta de lista de usuários, consulta simples, atualização e exclusão.
+  * Cadastro de clientes (ClientId e ClientSecret):
+    Cadastro, consulta de lista de clientes, consulta simples, atualização e exclusão.
+  * Suporte a múltiplos grant types:    
+    Authorization Code, Client Credentials, Refresh Token, e outros.
 
+* Dependências:
+  * [Authorization Server](https://github.com/alberes/register-manager-authorization-server)
+  
 ### Estrutura do Banco de Dados
 * Fluxo Client Credencials    
   O projeto utiliza uma tabela chamada client para o fluxo client credencials. A seguinte restrição foi adicionada para garantir a unicidade do campo de client_id:    
@@ -69,7 +72,7 @@ Um opção é criar um container docker com a imagem do Postgres, abaixo um exem
 docker run --name postgresdb -p 5432:5432 -e POSTGRES_PASSWORD=postgres -e POSTGRES=postgres -e POSTGRES_DB=register_manager -d postgres:16.3
 ```
 4. Executar o projeto
-- Abrir o terminal na raiz do projeto [SUB_DIRETORIOS]/register-manager-resource-server e exeuctar o comando abaixo para gerar o pacote.  
+- Abrir o terminal no diretório raiz do projeto [SUB_DIRETORIOS]/register-manager-resource-server e exeuctar o comando abaixo para gerar o pacote.  
 ```
 mvn -DskipTests=true clean package
 ```
