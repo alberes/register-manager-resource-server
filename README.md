@@ -2,7 +2,7 @@
 Este projeto é responsável por cadastro de usuários e clientes (ClientId e ClientSecret) e trabalha junto com authorizarion server.
 
 * Funcionalidades
-  * Usuário:    
+  * Usuários:    
     Cadastro, consulta de lista de usuários, consulta simples, atualização e exclusão.
   * Clientes (ClientId e ClientSecret):  
     Cadastro, consulta de lista de clientes, consulta simples, atualização e exclusão.
@@ -14,10 +14,12 @@ Este projeto é responsável por cadastro de usuários e clientes (ClientId e Cl
   
 ### Estrutura do Banco de Dados
 * Fluxo Client Credencials    
-  O projeto utiliza uma tabela chamada client para o fluxo client credencials. A seguinte restrição foi adicionada para garantir a unicidade do campo de client_id:    
+  O projeto utiliza uma tabela chamada client para o fluxo client credencials.  
+  A seguinte restrição foi adicionada para garantir a unicidade do campo de client_id:    
   ALTER TABLE IF exists client ADD CONSTRAINT client_client_id UNIQUE (client_id);
 * Fluxo Authorization Code    
-  O projeto utiliza uma tabela chamada user_account para o fluxo authorization code. A seguinte restrição foi adicionada para garantir a unicidade do campo de email:    
+  O projeto utiliza uma tabela chamada user_account para o fluxo authorization code.  
+  A seguinte restrição foi adicionada para garantir a unicidade do campo de email:    
   ALTER TABLE IF exists user_account ADD CONSTRAINT user_account_email UNIQUE (email);
 
 ### Tecnologias Utilizadas
@@ -64,8 +66,7 @@ Este projeto é responsável por cadastro de usuários e clientes (ClientId e Cl
   Certifique-se de que o banco de dados está configurado corretamente.    
   A aplicação irá criar as tabelas automaticamento caso não exista ou execute o script antes que se encontra no projeto.    
   Localizar os arquivos [SUB_DIRETORIOS]/register-manager-resource-server/DDL.sql e [SUB_DIRETORIOS]/register-manager-resource-server/DML.sql
-3. Usando uma imagem Docker (Opcional caso tenha uma banco instalado)
-4. Tempo de sessão está configurado para 60 minutos
+3. Usando uma imagem Docker (Opcional caso não tenha uma banco instalado)
 
 Um opção é criar um container docker com a imagem do Postgres, abaixo um exemplo que configurar usuário, senha e cria o banco de dados.  
 ```
@@ -95,7 +96,7 @@ A aplicação subirá na porta 9080
     - [Memória](http://localhost:9081/actuator/metrics/jvm.buffer.memory.used)
     - [CPU](http://localhost:9081/actuator/metrics/process.cpu.usage)
     - [Autorzação](http://localhost:9081/actuator/metrics/spring.security.authorizations.active)
-    - [Sessões]([)tomcat.sessions.active.current)
+    - [Sessões](tomcat.sessions.active.current)
 3. Testes usando Postman
     - Localize a collection que se encontra no diretório [SUB_DIRETORIOS]/register-manager-resource-server/register-manager-resource-server.postman_collection
     - Importar no Postman
@@ -108,69 +109,69 @@ A aplicação subirá na porta 9080
 
 1. Montando um ambiente Docker (alterar a variável de ambiente active para docker no arquivo application.yaml)
    <a id="criar-register-manager-resource-server"></a>
-    - Criando uma imagem da aplicação
+- Criando uma imagem da aplicação
 ```
 docker build --tag register-manager-resource-server:1.0.0 .
 ```
-    - Criando uma rede para comunicação entre os containeres
+- Criando uma rede para comunicação entre os containeres
 ```
 docker network create register-manager-authorization-network
 ```
-    - Subindo um container Docker com banco de dados Postgres
+- Subindo um container Docker com banco de dados Postgres
 ```
 docker run --name postgresdb -p 5432:5432 -e POSTGRES_PASSWORD=postgres -e POSTGRES=postgres -e POSTGRES_DB=register_manager --network register-manager-authorization-network -d postgres:16.3
 ```
-    - Subindo um container Docker da aplicação register-manager-resource-server
+- Subindo um container Docker da aplicação register-manager-resource-server
 ```
 docker run --name register-manager-resource-server -p 9080:9080 -p 9081:9081 --network register-manager-authorization-network -d register-manager-resource-server:1.0.0
 ```
-    - ou use as veriáveis de ambiente
+- ou use as veriáveis de ambiente
 ```
 docker run --name register-manager-resource-server -p 9080:9080 -p 9081:9081 --network register-manager-authorization-network -e DATASOURCE_URL=jdbc:postgresql://postgresdb:5432/register_manager -e DATASOURCE_USERNAME=postgres -e DATASOURCE_PASSWORD=postgres -e SHOW_SQL=true -e DDL_AUTO=update -e FORMAT_SQL=true -e APP_PORT=9080 -e MONITORING_PORT=9081 -e MONITORING_LIST=* -e LOG_NAME=register-manager-resource-server.log -e LOG_LEVEL=warn -d register-manager-resource-server:1.0.0
 ``` 
-   - Listando os containeres que estão no ar
+- Listando os containeres que estão no ar
 ```
 docker ps
 ``` 
-   - Listando as imagens
+- Listando as imagens
 ```
 docker images
 ```
-   - Parando o contaner
+- Parando o contaner
 ```
 docker stop register-manager-resource-server
 ```
-   - Subindo um container já existente
+- Subindo um container já existente
 ```
 docker start register-manager-resource-server
 ```
 3. Demontando o ambiente (Pare os containeres da aplicação e banco de dados antes de executar os comandos abaixo)
-    - Removendo a aplicação
+- Removendo a aplicação
 ```
 docker rm register-manager-resource-server
 ```
-   - Removendo o banco de dados
+- Removendo o banco de dados
 ```
 docker rm postgresdb
 ```
-   - Removendo a rede
+- Removendo a rede
 ```
 docker network rm register-manager-authorization-network
 ```
-   - Removendo a imagem da aplicação
+- Removendo a imagem da aplicação
 ```
 docker rmi register-manager-resource-server:1.0.0
 ```
-   - Removendo a imagem do banco de dados
+- Removendo a imagem do banco de dados
 ```
 docker rmi postgres:16.3
 ```
-   ### Docker Compose para gerenciar os containeres
-   - Com a imagem da aplicação [register-manager-resource-server](#criar-register-manager-resource-server) é só executar o comando abaixo:
+### Docker Compose para gerenciar os containeres
+- Com as imagens da aplicação [register-manager-authorization-server](https://github.com/alberes/register-manager-authorization-server), [register-manager-resource-server](#criar-register-manager-resource-server) e [register-manager-frontend-client](https://github.com/alberes/register-manager-frontend-client) é só executar o comando abaixo:
 ```   
 docker-compose up -d
 ```
-   - Parando a aplicação com docker compose
+- Parando a aplicação com docker compose
 ```
 docker-compose down
 ```
