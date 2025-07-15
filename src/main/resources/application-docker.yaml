@@ -3,8 +3,8 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: ${URL_OAUTH2:http://localhost:9090}
-          jwk-set-uri: ${URL_OAUTH2_JWKS:http://localhost:8081/oauth2/jwks}
+          issuer-uri: ${URL_OAUTH2:http://register-manager-authorization-server:9090}
+          jwk-set-uri: ${URL_OAUTH2_JWKS:http://register-manager-authorization-server:9090/oauth2/jwks}
   datasource:
     url: ${DATASOURCE_URL:jdbc:postgresql://postgresdb:5432/register_manager_resource_server}
     username: ${DATASOURCE_USERNAME:postgres}
