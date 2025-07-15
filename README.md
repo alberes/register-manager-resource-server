@@ -2,9 +2,9 @@
 Este projeto é responsável por cadastro de usuários e clientes (ClientId e ClientSecret) e trabalha junto com authorizarion server.
 
 * Funcionalidades
-  * Cadastro de usuário:    
+  * Usuário:    
     Cadastro, consulta de lista de usuários, consulta simples, atualização e exclusão.
-  * Cadastro de clientes (ClientId e ClientSecret):
+  * Clientes (ClientId e ClientSecret):  
     Cadastro, consulta de lista de clientes, consulta simples, atualização e exclusão.
   * Suporte a múltiplos grant types:    
     Authorization Code, Client Credentials, Refresh Token, e outros.
