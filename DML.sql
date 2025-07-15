@@ -7,10 +7,10 @@ delete from client;
 
 
 INSERT INTO  client(ID, CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, SCOPE, CREATED_DATE, LAST_MODIFIED_DATE)
-VALUES (gen_random_uuid(), 'my-client-id', '$2a$12$UKQvBMFvDSOwRdPbPCiY0eXSt9rSpWgiFG2Wi5GrpQV6yqAEya0Be', 'http://localhost:8080/login/oauth2/code/register-manager-frontend-client-oidc', 'USER', NOW(), NOW());
+VALUES (gen_random_uuid(), 'my-client-id', '$2a$12$UKQvBMFvDSOwRdPbPCiY0eXSt9rSpWgiFG2Wi5GrpQV6yqAEya0Be', 'http://127.0.0.1:8080/login/oauth2/code/register-manager-frontend-client-oidc', 'USER', NOW(), NOW());
 
 INSERT INTO  client(ID, CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, SCOPE, CREATED_DATE, LAST_MODIFIED_DATE)
-VALUES (gen_random_uuid(), 'admin-client-id', '$2a$12$40ulvRdrXkyEszgVHD/kEOdZTEzJpnrM7JN0WqGzoFkNJ3eSLRrm.', 'http://localhost:8080/login/oauth2/code/register-manager-frontend-client-oidc', 'ADMIN', NOW(), NOW());
+VALUES (gen_random_uuid(), 'admin-client-id', '$2a$12$40ulvRdrXkyEszgVHD/kEOdZTEzJpnrM7JN0WqGzoFkNJ3eSLRrm.', 'http://127.0.0.1:8080/login/oauth2/code/register-manager-frontend-client-oidc', 'ADMIN', NOW(), NOW());
 
 INSERT INTO user_account(ID, NAME, EMAIL, PASSWORD, CREATED_DATE, LAST_MODIFIED_DATE)
 VALUES (gen_random_uuid(), 'Admin Manager Data', 'admin@admin.com', '$2a$12$jyoZ3UQBbkYll/oDXIcYh.KJFn6xiVcVs./28e/IWpi5i4SyVSQne', NOW(), NOW());
