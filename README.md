@@ -1,7 +1,7 @@
 
 
 
-# Projeto: Servidor de autorização
+# Projeto: Servidor de recursos
 Este projeto é responsável por cadastro de usuários e clientes (ClientId e ClientSecret) e trabalha junto com authorizarion server.
 
 Funcionalidades
