@@ -4,24 +4,24 @@ services:
     container_name: postgresdb
     ports:
       - 5432:5432
-    networks:
-      - register-manager-authorization-network
     environment:
       POSTGRES_PASSWORD: postgres
       POSTGRES: postgres
       POSTGRES_DB: register_manager
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
   pgadmin4:
     image: dpage/pgadmin4:8.9
     container_name: pgadmin
     ports:
       - "15432:80"
-    networks:
-      - register-manager-authorization-network
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: admin
     volumes:
       - pgadmin-data:/var/lib/pgadmin
+    depends_on:
+      - postgresdb
   register-manager-authorization-server:
     image: register-manager-authorization-server:1.0.0
     container_name: register-manager-authorization-server
@@ -29,6 +29,7 @@ services:
       - "9090:9090"
       - "9091:9091"
     environment:
+      SERVER_ISSUER: http://register-manager-authorization-server:9090
       DATASOURCE_URL: jdbc:postgresql://postgresdb:5432/register_manager
       DATASOURCE_USERNAME: postgres
       DATASOURCE_PASSWORD: postgres
@@ -41,8 +42,9 @@ services:
       LOG_LEVEL: warn
       ACCESS_TOKEN_EXPIRATION: 30
       REFRESH_TOKEN_EXPIRATION: 60
-    networks:
-      - register-manager-authorization-network
+    depends_on:
+      - postgresdb
+      - pgadmin4
   register-manager-resource-server:
     image: register-manager-resource-server:1.0.0
     container_name: register-manager-resource-server
@@ -56,31 +58,47 @@ services:
       SHOW_SQL: true
       DDL_AUTO: update
       FORMAT_SQL: true
-      APP_PORT: 9090
-      MONITORING_PORT: 9091
+      APP_PORT: 9080
+      MONITORING_PORT: 9081
       LOG_NAME: register-manager-resource-server.log
-      LOG_LEVEL: warn
-    networks:
-      - register-manager-authorization-network
+      LOG_LEVEL: debug
+    depends_on:
+      - postgresdb
+      - pgadmin4
+      - register-manager-authorization-server
   register-manager-frontend-client:
     image: register-manager-frontend-client:1.0.0
-    container_name: register-manager-resource-server
-    ports:
-      - "8080:8080"
+    container_name: register-manager-frontend-client
+#NGINX export on port 80
+#    ports:
+#      - "8080:8080"
     environment:
-      ADMIN_CLIENT_ID: admin-client-id
-      ADMIN_CLIENT_SECRET: admin-client-secret
+      ADMIN_CLIENT_ID: admin-client-id-docker
+      ADMIN_CLIENT_SECRET: admin-client-secret-docker
       AUTHORIZATION_CODE: authorization_code
       SCOPE: openid, profile, email, address, phone
       CLIENT_NAME: register-manager-frontend-client-oidc
-      ISSUER_URI: http://localhost:9090
+      ISSUER_URI: http://register-manager-authorization-server:9090
       LOG_NAME: register-manager-frontend-client.log
-      LOG_LEVEL: warn
-      REGISTER_MANAGER_RESOURCE_URL: http://localhost:9080
-    networks:
-      - register-manager-authorization-network
-networks:
-  register-manager-authorization-network:
-    driver: bridge
+      LOG_LEVEL: debug
+      REGISTER_MANAGER_RESOURCE_URL: http://register-manager-resource-server:9080
+    depends_on:
+      - postgresdb
+      - pgadmin4
+      - register-manager-authorization-server
+      - register-manager-resource-server
+  nginx:
+    image: nginx:1.29.0
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - postgresdb
+      - pgadmin4
+      - register-manager-authorization-server
+      - register-manager-resource-server
+      - register-manager-frontend-client
 volumes:
   pgadmin-data:
+  postgres_data:

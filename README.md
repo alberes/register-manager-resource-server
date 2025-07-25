@@ -45,6 +45,8 @@ Este projeto é responsável por cadastro de usuários e clientes (ClientId e Cl
 * Container:
   * [Docker](https://www.docker.com/)
   * [Docker Hub](https://hub.docker.com/)
+* HTTP web server:
+  * [nginx](https://nginx.org/)
 * Ferramentas:
   * [Postman](https://www.postman.com/)
   * [Google Chrome Versão 136.0.7103.93 Versão oficial 64 bits](https://www.google.com/intl/pt-BR/chrome/)

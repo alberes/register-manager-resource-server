@@ -36,7 +36,7 @@ public class ClientController implements GenericController{
     private final ClientMapper mapper;
 
     @PostMapping
-    @PreAuthorize(Constants.HAS_ROLE_ADMIN)
+    @PreAuthorize(Constants.HAS_ROLE_ADMIN + Constants._OR_ + Constants.HAS_CLIENT_AUTHORITY_WRITE)
     @Operation(summary = "Save client.", description = "Save client in database. Only user with profile ADMIN can create client.",
         operationId = "saveClient")
     @ApiResponses({
@@ -57,7 +57,7 @@ public class ClientController implements GenericController{
     }
 
     @GetMapping("/{clientId}")
-    @PreAuthorize(Constants.HAS_ROLE_ADMIN_USER)
+    @PreAuthorize(Constants.HAS_ROLE_ADMIN_USER + Constants._OR_ + Constants.HAS_CLIENT_AUTHORITY_READ)
     @Operation(summary = "Find client.", description = "Find client in database. User with profile ADMIN can access any users and other profiles can only access resources that belong to him.",
         operationId = "findUser")
     @ApiResponses({
@@ -75,7 +75,7 @@ public class ClientController implements GenericController{
     }
 
     @PutMapping("/{clientId}")
-    @PreAuthorize(Constants.HAS_ROLE_ADMIN_USER)
+    @PreAuthorize(Constants.HAS_ROLE_ADMIN_USER + Constants._OR_ + Constants.HAS_CLIENT_AUTHORITY_UPDATE)
     @Operation(summary = "Update client.", description = "Update with success. User with profile ADMIN can access any clients and other profiles can only access resources that belong to him.",
         operationId = "updateClient")
     @ApiResponses({
@@ -94,7 +94,7 @@ public class ClientController implements GenericController{
     }
 
     @DeleteMapping("/{clientId}")
-    @PreAuthorize(Constants.HAS_ROLE_ADMIN_USER)
+    @PreAuthorize(Constants.HAS_ROLE_ADMIN_USER + Constants._OR_ + Constants.HAS_CLIENT_AUTHORITY_DELETE)
     @Operation(summary = "Delete client.", description = "Delete with success. User with profile ADMIN can access any clients and other profiles can only access resources that belong to him.",
         operationId = "deleteClient")
     @ApiResponses({
@@ -110,7 +110,7 @@ public class ClientController implements GenericController{
     }
 
     @GetMapping
-    @PreAuthorize(Constants.HAS_ROLE_ADMIN)
+    @PreAuthorize(Constants.HAS_ROLE_ADMIN + Constants._OR_ + Constants.HAS_CLIENT_AUTHORITY_READ)
     @Operation(summary = "Find clients.", description = "Find clients in database. User with profile ADMIN can access any clients and other profiles can only access resources that belong to him.",
         operationId = "findUsers")
     @ApiResponses({
@@ -137,24 +137,9 @@ public class ClientController implements GenericController{
                         c.getLastModifiedDate(), c.getCreatedDate()));
         return ResponseEntity.ok(pageReport);
     }
-/*
-    @GetMapping("/authenticated")
-    @PreAuthorize(Constants.HAS_ROLE_ADMIN_USER)
-    @Operation(summary = "Find profile user.", description = "Find profile user in database. User with profile ADMIN can access any users and other profiles can only access resources that belong to him.")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Found user in database."),
-            @ApiResponse(responseCode = "403", description = Constants.UNAUTHORIZED_MESSAGE,
-                    content = @Content(schema = @Schema(implementation = StandardErrorDto.class)))
-    })
-    public ResponseEntity<UserAccountProfileDto> userAuthentication(){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserPrincipal userPrincipal = (UserPrincipal)authentication.getPrincipal();
-        UserAccountProfileDto userAccountProfileDto = this.mapper.toProfileDto(userPrincipal.getUserAccount());
-        return ResponseEntity.ok(userAccountProfileDto);
-    }*/
 
     @GetMapping("/claims")
-    @PreAuthorize(Constants.HAS_ROLE_ADMIN_USER)
+    @PreAuthorize(Constants.HAS_ROLE_ADMIN_USER + Constants._OR_ + Constants.HAS_CLIENT_AUTHORITY_READ)
     public Map<String, Object> getClaims(@AuthenticationPrincipal Jwt jwt) {
         return jwt.getClaims(); // Retorna todas as claims do token JWT
     }

@@ -39,7 +39,7 @@ public class UserAccountController implements GenericController{
     private final UserAccountMapper mapper;
 
     @PostMapping
-    @PreAuthorize(Constants.HAS_ROLE_ADMIN)
+    @PreAuthorize(Constants.HAS_ROLE_ADMIN + Constants._OR_ + Constants.HAS_USER_AUTHORITY_WRITE)
     @Operation(summary = "Save user.", description = "Save user in database. Only user with profile ADMIN can create user.",
         operationId = "saveUser")
     @ApiResponses({
@@ -63,7 +63,7 @@ public class UserAccountController implements GenericController{
 
     @GetMapping("/{id}")
     //@PreAuthorize(Constants.HAS_ROLE_ADMIN_USER)
-    @PreAuthorize(Constants.HAS_ROLE_ADMIN_USER + " and hasAuthority('SCOPE_user.read')")
+    @PreAuthorize(Constants.HAS_ROLE_ADMIN_USER +  Constants._OR_ + Constants.HAS_USER_AUTHORITY_READ)
     @Operation(summary = "Find user.", description = "Find user in database. User with profile ADMIN can access any users and other profiles can only access resources that belong to him.",
         operationId = "findUser")
     @ApiResponses({
@@ -82,7 +82,7 @@ public class UserAccountController implements GenericController{
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize(Constants.HAS_ROLE_ADMIN_USER)
+    @PreAuthorize(Constants.HAS_ROLE_ADMIN_USER + Constants._OR_ + Constants.HAS_USER_AUTHORITY_UPDATE)
     @Operation(summary = "Update user.", description = "Update with success. User with profile ADMIN can access any users and other profiles can only access resources that belong to him.",
         operationId = "updateUser")
     @ApiResponses({
@@ -102,7 +102,7 @@ public class UserAccountController implements GenericController{
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize(Constants.HAS_ROLE_ADMIN_USER)
+    @PreAuthorize(Constants.HAS_ROLE_ADMIN_USER + Constants._OR_ + Constants.HAS_USER_AUTHORITY_DELETE)
     @Operation(summary = "Delete user.", description = "Delete with success. User with profile ADMIN can access any users and other profiles can only access resources that belong to him.",
         operationId = "deleteUser")
     @ApiResponses({
@@ -119,7 +119,7 @@ public class UserAccountController implements GenericController{
     }
 
     @GetMapping
-    @PreAuthorize(Constants.HAS_ROLE_ADMIN)
+    @PreAuthorize(Constants.HAS_ROLE_ADMIN + Constants._OR_ + Constants.HAS_USER_AUTHORITY_READ)
     @Operation(summary = "Find users.", description = "Find users in database. User with profile ADMIN can access any users and other profiles can only access resources that belong to him.",
         operationId = "findUsers")
     @ApiResponses({
@@ -144,24 +144,9 @@ public class UserAccountController implements GenericController{
                         u.getId().toString(), u.getName(), u.getEmail(), u.getLastModifiedDate(), u.getCreatedDate()));
         return ResponseEntity.ok(pageReport);
     }
-/*
-    @GetMapping("/authenticated")
-    @PreAuthorize(Constants.HAS_ROLE_ADMIN_USER)
-    @Operation(summary = "Find profile user.", description = "Find profile user in database. User with profile ADMIN can access any users and other profiles can only access resources that belong to him.")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Found user in database."),
-            @ApiResponse(responseCode = "403", description = Constants.UNAUTHORIZED_MESSAGE,
-                    content = @Content(schema = @Schema(implementation = StandardErrorDto.class)))
-    })
-    public ResponseEntity<UserAccountProfileDto> userAuthentication(){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserPrincipal userPrincipal = (UserPrincipal)authentication.getPrincipal();
-        UserAccountProfileDto userAccountProfileDto = this.mapper.toProfileDto(userPrincipal.getUserAccount());
-        return ResponseEntity.ok(userAccountProfileDto);
-    }*/
 
     @GetMapping("/claims")
-    @PreAuthorize(Constants.HAS_ROLE_ADMIN_USER)
+    @PreAuthorize(Constants.HAS_ROLE_ADMIN_USER + Constants._OR_ + Constants.HAS_USER_AUTHORITY_READ)
     public Map<String, Object> getClaims(@AuthenticationPrincipal Jwt jwt) {
         return jwt.getClaims(); // Retorna todas as claims do token JWT
     }
