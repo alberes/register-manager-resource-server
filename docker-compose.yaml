@@ -82,6 +82,7 @@ services:
       LOG_NAME: register-manager-frontend-client.log
       LOG_LEVEL: debug
       REGISTER_MANAGER_RESOURCE_URL: http://register-manager-resource-server:9080
+      REGISTER_MANAGER_AUTHORIZATION_URL: http://register-manager-authorization-server:9090
     depends_on:
       - postgresdb
       - pgadmin4
